@@ -1,0 +1,40 @@
+<div style="padding:13px;">
+  <button class="whiteicons" mat-icon-button (click)="onStateChange()">
+    <mat-icon  style="margin-left: 222px;" *ngIf="expanded">close</mat-icon>
+    <mat-icon *ngIf="!expanded">menu</mat-icon>
+  </button>
+</div>
+
+<mat-card *ngIf="expanded" class="sidenav-card">
+  <img src="assets/images/BF-RGB-big-BF.png" class ="center">
+  <h5 style="font-size: 30px;margin-top:5.4%;text-align: center;">Buyer Profile App</h5>
+</mat-card>
+
+<mat-nav-list>
+
+  <mat-list-item routerLink="/home" routerLinkActive='active'>
+    <span class="full-width" *ngIf="expanded">Dashboard</span>
+    <mat-icon style="font-size:27px;" class="whiteicons" mat-list-icon>av_timer</mat-icon>
+  </mat-list-item>
+
+  <mat-list-item routerLink="/profile-booklet" routerLinkActive='active'>
+    <span class="full-width" *ngIf="expanded">Booklet Library</span>
+    <mat-icon  style="font-size:27px;" class="whiteicons" mat-list-icon>menu_book</mat-icon>
+  </mat-list-item>
+
+  <mat-list-item routerLink="/user" routerLinkActive='active'>
+    <span class="full-width" *ngIf="expanded">User</span>
+    <mat-icon style="font-size:27px;" class="whiteicons" mat-list-icon>account_circle</mat-icon>
+  </mat-list-item>
+
+</mat-nav-list>
+
+<div style="position: absolute; bottom: 15px;">
+    <img (click)="logout()" style="padding: 8px; cursor: pointer" *ngIf="!expanded" src="assets/images/logout.png" alt="logout" width="40" height="40">
+    <img *ngIf="expanded" src="assets/images/user.png" alt="User" style="margin-left:8px;" width="60" height="60">
+    <br>
+    <span *ngIf="expanded" style="color: #4e9691;font-size: 23px;margin-left:8px;padding-right: 6px;">
+      <b>{{ userFullName }}</b>
+    </span>
+    <img (click)="logout()" *ngIf="expanded" src="assets/images/logout.png" alt="logout" style="margin-top: -1px;margin-bottom: -2px; cursor: pointer" width="40" height="40">
+</div>

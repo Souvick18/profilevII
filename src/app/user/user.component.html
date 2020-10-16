@@ -1,0 +1,64 @@
+<mat-sidenav-container class="main-container" autosize>
+
+  <mat-sidenav #sidenav id="sidenav" mode="side" [class.menu-open]="isExpanded" [class.menu-close]=!isExpanded opened="true">
+    <app-sidenav [expanded]="isExpanded" (changeSidenavState)="changeState($event)"></app-sidenav>
+  </mat-sidenav>
+
+  <div class="main-sidenav-content" *ngIf="userInit">
+    <div class="main-header">
+      <mat-card-title style="padding: 20px;font-size:30px;padding-left:75px;color:white;">
+        <b>{{userFullName}}</b>
+      </mat-card-title>
+  </div>
+
+    <div class="user-profile-row">
+      <div class="user-profile-column">
+        <h2 style="color: #4E9691;">General Information</h2>
+        <mat-card class="generalinfo-card">
+
+          <mat-card-title>
+            <b>Job Title:</b>
+            &nbsp;
+            {{ userInit.job_title }}
+          </mat-card-title>
+
+          <mat-card-title>
+            <b>Registration Type:</b>
+            &nbsp;
+            {{ userInit.type }}
+          </mat-card-title>
+
+          <mat-card-title>
+            <b>Registration Date:</b>
+            &nbsp;
+            {{ userInit.created_at | date: 'yyyy-MM-dd' }}
+          </mat-card-title>
+
+        </mat-card>
+      </div>
+
+      <div class="user-profile-column">
+         <img src="assets/images/user.png" alt="User" id="image-user" [class.image-user-open]="isExpanded" [class.image-user-close]="!isExpanded">
+      </div>
+    </div>
+
+    <h2 style="color: #4E9691;">Contact Information</h2>
+    <mat-card class="user-card">
+
+      <mat-card-title>
+        <b>Email Address:</b>
+        &nbsp;
+        <a href="mailto:{{ userInit.email_address }}" style="white-space: nowrap;">{{ userInit.email_address }}</a>
+      </mat-card-title>
+
+      <mat-card-title>
+        <b>LinkedIn Profile:</b>
+        &nbsp;
+        <a target="_blank" href="{{ userInit.linkedin_url }}" style="white-space: nowrap;">{{ userInit.linkedin_url }}</a>
+      </mat-card-title>
+
+    </mat-card>
+
+  </div>
+
+</mat-sidenav-container>

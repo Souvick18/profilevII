@@ -1,0 +1,18 @@
+<div class="login-container">
+  <div class="login-form-container">
+    <h1 class="welcome-text" >Welcome to Buyer Profile App</h1>
+      <input matInput type="text" [formControl]="username" placeholder="Username*">
+      <br>
+      <span class="error_msg" *ngIf="checkCredentialValidity && !this.username.valid">*Username Field Required</span>
+      <br>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password" placeholder="Password*">
+      <button class="visiblity-button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+        <mat-icon style="color: white;margin-bottom:24%;">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <br>
+      <span class="error_msg" *ngIf="checkCredentialValidity && !this.password.valid">*Password Field Required</span>
+      <br>
+      <mat-slide-toggle (change)=remember_action() [formControl]="rememberCredential" class="remember-toggle"> Remember Me</mat-slide-toggle>
+      <button class="success-button-md" style="margin-right: 26.5% !important;" (click)="login()" mat-raised-button>Login</button>
+  </div>
+</div>

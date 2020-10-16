@@ -1,0 +1,39 @@
+<mat-sidenav-container class="main-container" autosize>
+
+ <mat-sidenav #sidenav id="sidenav" mode="side" [class.menu-open]="isExpanded" [class.menu-close]=!isExpanded opened="true">
+    <app-sidenav [expanded]="isExpanded" (changeSidenavState)="changeState($event)"></app-sidenav>
+ </mat-sidenav>
+
+ <div class="main-sidenav-content" *ngIf="bookletInit && profilesInit">
+   <div class="main-header">
+      <mat-card-title style="padding: 20px;font-size:30px;padding-left:75px;color:white;">
+        <b>{{bookletInit.title}}</b>
+      </mat-card-title>
+    </div>
+
+    <a *ngFor="let profile of profilesInit" [routerLink]="['profile/', profile.id]">
+      <mat-card *ngIf="profile.status === 'A'" class="library-card">
+         <mat-card-title style="font-size: 27px;"><b>{{ profile.fullname }}</b>, {{ profile.company_name }}</mat-card-title>
+          <mat-card-title style="font-size: 20px;"><i>{{ profile.job_title }}</i>
+          </mat-card-title>
+      </mat-card>
+    </a>
+    <a *ngFor="let profile of profilesInit" href="javascript:void(0)">
+      <mat-card *ngIf="profile.status === 'D'" class="library-card-deactive">
+        <mat-card-title style="font-size: 27px;"><b>{{ profile.fullname }}</b>, {{ profile.company_name }}</mat-card-title>
+         <mat-card-title style="font-size: 20px;"><i>{{ profile.job_title }}</i>
+         </mat-card-title>
+     </mat-card>
+    </a>
+   <div class="profile-card" style="justify-content: center;display:flex;">
+    <button class="primary-button-lg" (click)=addnewProfileModal()  mat-raised-button>Add New Profile</button>
+   </div>
+
+   <div class="profile-card" style="justify-content:center; display:flex; padding-bottom: 20px;">
+   <a style="color: #4E9691; text-decoration: none; font-size: 36px;" [routerLink]="['/buyer-profile-booklet', bookletInit.title]" [queryParams]="{'bklt_id': bookletId}" target="_blank">
+      <b><i>Export Booklet</i></b>
+    </a>
+  </div>
+ </div>
+
+</mat-sidenav-container>

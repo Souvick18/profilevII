@@ -1,0 +1,135 @@
+<mat-sidenav-container class="main-container" autosize>
+
+ <mat-sidenav #sidenav id="sidenav" mode="side" [class.menu-open]="isExpanded" [class.menu-close]=!isExpanded opened="true">
+    <app-sidenav [expanded]="isExpanded" (changeSidenavState)="changeState($event)"></app-sidenav>
+ </mat-sidenav>
+
+ <div class="progress-spinner" *ngIf="serviceResponseProgress">
+
+  <mat-progress-spinner *ngIf="serviceResponseProgress"
+         class="progress-spinner-margin"
+         [color]="srpColor"
+         [mode]="srpMode"
+         [value]="srpValue">
+     </mat-progress-spinner>
+
+ </div>
+
+<div class="main-sidenav-content" *ngIf="profileInit">
+   <div class="main-header">
+      <mat-card-title style="padding: 20px; padding-left: 75px; padding-bottom: unset; font-size: 30px; color:white;">
+        <b>{{profileInit.fullname}}</b>
+      </mat-card-title>
+      <mat-card-title>
+        <button mat-button class="danger-button-md" style="font-size: 18px; width: 117px; margin-right: 5px; margin-top: 0px !important;" (click)="removeProfileDialog()">
+          Remove
+          <mat-icon style="margin-top: -5px;">delete</mat-icon>
+         </button>
+         <button mat-button class="primary-button-md" style="font-size: 18px; width: 90px; margin-right: 5px; margin-top: 0px !important;" (click)="editProfileDialog()">
+          Edit
+          <mat-icon style="margin-top: -5px;">edit</mat-icon>
+         </button>
+      </mat-card-title>
+   </div>
+
+   <div class="internal-sidenav-division">
+      <div class="double-card-division-flex">
+         <mat-card  style="width:255px; max-width:255px;" class="profile-half-card">
+            <img [src]=[profileInit.image]  width="250" height="250">
+         </mat-card>
+         <mat-card class="profile-half-card">
+            <p class="profile-field-body" style="margin-top: 5px;">
+              <b class="profile-field-title">Name: </b>
+              <a style="text-decoration:none; color: #0873bc;" href="{{'https://' + profileInit.linkedin_url + '/'}}" target="_blank">{{profileInit.fullname}}</a>, {{profileInit.company_name}}
+            </p>
+            <p class="profile-field-body">
+              <b class="profile-field-title">Title: </b>{{profileInit.job_title}}
+            </p>
+            <p class="profile-field-body">
+              <b class="profile-field-title">Email: </b><a style="text-decoration:none; color: #0873bc;" href="{{'mailto:' + profileInit.email_address}}">{{profileInit.email_address}}</a>
+            </p>
+            <p class="profile-field-body">
+              <b class="profile-field-title">Website: </b><a style="text-decoration:none; color: #0873bc;" href="{{'http://' + profileInit.company_website + '/'}}" target="_blank">{{profileInit.company_website}}</a>
+            </p>
+            <p class="profile-field-body">
+              <b class="profile-field-title">Phone: </b>{{profileInit.contact_no}}
+            </p>
+            <p class="profile-field-body">
+              <b class="profile-field-title">Address: </b>{{profileInit.company_address}}
+            </p>
+       </mat-card>
+      </div>
+
+      <mat-card class="profile-card" *ngIf="profileInit.strategic_priorities.length > 0 || profileInit.job_role.trim().length > 0">
+        <mat-card-title class="profile-card-title" *ngIf="profileInit.strategic_priorities.length > 0">
+            <span>Strategic priorities</span>
+        </mat-card-title>
+        <ul class="profile-card-body">
+         <ng-container *ngFor="let priority of profileInit.strategic_priorities">
+            <li *ngIf="priority.trim().length > 0">
+               {{priority}}
+            </li>
+         </ng-container>
+        </ul>
+        <mat-card-title class="profile-card-title" *ngIf="profileInit.job_role.trim().length > 0">
+            <span>{{firstName}}'s Role</span>
+        </mat-card-title>
+        <p style="padding-left:20px; line-height: 150%;" class="profile-card-body">{{profileInit.job_role}}</p>
+      </mat-card>
+
+      <div class="double-card-division-flex">
+         <mat-card [ngClass]="(profileInit.funded_initiative.length > 0) ? 'tech-stack-fi-present' : 'tech-stack-fi-absent'" *ngIf="profileInit.tech_stack.length > 0">
+            <mat-card-title class="profile-card-title">
+               <span>Tech Stack</span>
+            </mat-card-title>
+            <ul class="profile-card-body">
+               <ng-container *ngFor="let tech of profileInit.tech_stack">
+                  <li *ngIf="tech.trim().length > 0">
+                     {{tech}}
+                  </li>
+               </ng-container>
+            </ul>
+         </mat-card>
+         <mat-card class="profile-half-card" *ngIf="profileInit.funded_initiative.length > 0">
+            <mat-card-title class="profile-card-title">
+               <span>Funded initiatives for the next 12 months</span>
+            </mat-card-title>
+            <ul class="profile-card-body">
+               <ng-container *ngFor="let initiative of profileInit.funded_initiative">
+                  <li *ngIf="initiative.trim().length > 0">
+                     {{initiative}}
+                  </li>
+               </ng-container>
+            </ul>
+         </mat-card>
+      </div>
+
+      <mat-card class="profile-card" *ngIf="profileInit.technologies_interest.length > 0">
+        <mat-card-title class="profile-card-title">
+            <span>Technologies interested in</span>
+        </mat-card-title>
+        <ul style="column-count: 2;" class="profile-card-body">
+         <ng-container *ngFor="let technology of profileInit.technologies_interest">
+            <li style="line-height: 200%; margin-top:0px;" *ngIf="technology.trim().length > 0">
+             {{technology}}
+            </li>
+         </ng-container>
+        </ul>
+      </mat-card>
+
+      <mat-card class="profile-card" *ngIf="profileInit.topics_interest.length > 0">
+        <mat-card-title class="profile-card-title">
+            <span>Topics interested in</span>
+        </mat-card-title>
+        <ul class="profile-card-body">
+         <ng-container *ngFor="let topic of profileInit.topics_interest">
+            <li *ngIf="topic.trim().length > 0">
+               {{topic}}
+            </li>
+         </ng-container>
+        </ul>
+      </mat-card>
+   </div>
+</div>
+
+</mat-sidenav-container>

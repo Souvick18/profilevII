@@ -1,0 +1,70 @@
+.user-card {
+    padding:20px;
+    margin-top:1%;
+    margin-bottom: 1%;
+    margin-right: 1%;
+}
+
+.internal-sidenav-division{
+    padding:10px;
+    background-color: rgba(219, 219, 219, 0.5);
+}
+li{
+    margin-top: 15px;
+}
+
+li:first-child {
+    margin-top:0;
+}
+
+.user-half-card{
+    padding:15px;
+    margin-top:1%;
+    margin-bottom: 1%;
+    margin-right:1%;
+    width:40%;
+    flex: 33.33%;
+}
+
+.double-card-division-flex{
+    width:100%;
+    display: flex;
+}
+
+/* input[type="text"]{
+    width: 30%;
+    height: 21px;
+    border: 2px solid black;
+    border-radius: 1px;
+} */
+
+/* .innerdiv{
+    /* position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%); */
+    /* width: 200px;
+    height: 200px; */
+    /* border: 2px solid red } */
+
+.inputfield{
+    margin-top:-1.5%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+.add-text-button-success{
+    color: #4E9691;
+    font-size: 36px;
+    vertical-align: sub;
+    position: relative;
+    top:5px;
+    cursor: pointer;
+}
+
+.remove-text-button-danger{
+    color: #ff3366;
+    font-size: 36px;
+    vertical-align: sub;
+    position: relative;
+    top:5px;
+    cursor: pointer;
+}

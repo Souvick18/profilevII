@@ -1,0 +1,27 @@
+<mat-sidenav-container class="main-container" autosize>
+
+ <mat-sidenav #sidenav id="sidenav" mode="side" [class.menu-open]="isExpanded" [class.menu-close]=!isExpanded opened="true">
+    <app-sidenav [expanded]="isExpanded" (changeSidenavState)="changeState($event)"></app-sidenav>
+ </mat-sidenav>
+
+ <div class="main-sidenav-content">
+   <mat-tab-group animationDuration="0ms" mat-stretch-tabs>
+      <mat-tab label="Browse Booklets">
+         <div class="mat-tab-content-details">
+            <a *ngFor="let booklet of bookletsInit" [routerLink]="[booklet.id]">
+               <mat-card class="library-card" >
+                  <mat-card-title style="font-size: 27px;"><b>{{booklet.title}}</b></mat-card-title>
+                  <mat-card-title style="font-size: 20px;"><i>Created by <b>{{booklet.created_by.name}}</b> on <b>{{booklet.created_at | date: 'yyyy-MM-dd'}}</b></i></mat-card-title>
+               </mat-card>
+            </a>
+         </div>
+      </mat-tab>
+      <mat-tab label="Create Booklet" disabled>
+         <div class="mat-tab-content-details">
+            <h1>Booklet Creation Will Follow Soon</h1>
+         </div>
+      </mat-tab>
+   </mat-tab-group>
+ </div>
+
+</mat-sidenav-container>

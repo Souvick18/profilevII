@@ -1,0 +1,141 @@
+<div class="progress-spinner" *ngIf="serviceResponseProgress">
+
+  <mat-progress-spinner *ngIf="serviceResponseProgress"
+         class="progress-spinner-margin"
+         [color]="srpColor"
+         [mode]="srpMode"
+         [value]="srpValue">
+     </mat-progress-spinner>
+
+ </div>
+
+<div class="a4pagesize" *ngIf="bookletCompositeInit">
+
+  <!-- Booklet Header -->
+  <div>
+    <img [src]=[bookletCompositeInit.header_image] class="full-header-image">
+  </div>
+
+  <!-- Profile Start -->
+  <div *ngFor="let profile of bookletCompositeInit.profiles; let i = index">
+    <div>
+      <img [src]=[bookletCompositeInit.profile_header_image] class="full-profile-header-image">
+    </div>
+    <div class="internal-sidenav-division">
+      <div class="double-card-division-flex">
+        <mat-card  style="width: 250px; max-width: 250px; padding-top: 23px; margin-top: unset; padding-bottom: 15px;" class="profile-half-card">
+            <img [src]=[profile.image]  width="250" height="250">
+        </mat-card>
+        <mat-card class="profile-half-card" style="margin-right: unset; margin-top: unset; padding-bottom: 15px;">
+          <p class="profile-field-body" style="margin-top: 5px;">
+            <b class="profile-field-title">Name: </b>
+            <a style="text-decoration:none; color: #0873bc; font-weight: 600;" href="{{'https://' + profile.linkedin_url + '/'}}" target="_blank">{{profile.fullname}}</a>, {{profile.company_name}}
+          </p>
+          <p class="profile-field-body">
+            <b class="profile-field-title">Title: </b>{{profile.job_title}}
+          </p>
+          <p class="profile-field-body">
+            <b class="profile-field-title">Email: </b><a style="text-decoration:none; color: #0873bc; font-weight: 600;" href="{{'mailto:' + profile.email_address}}">{{profile.email_address}}</a>
+          </p>
+          <p class="profile-field-body">
+            <b class="profile-field-title">Website: </b><a style="text-decoration:none; color: #0873bc; font-weight: 600;" href="{{'http://' + profile.company_website + '/'}}" target="_blank">{{profile.company_website}}</a>
+          </p>
+          <p class="profile-field-body">
+            <b class="profile-field-title">Phone: </b>{{profile.contact_no}}
+          </p>
+          <p class="profile-field-body">
+            <b class="profile-field-title">Address: </b>{{profile.company_address}}
+          </p>
+        </mat-card>
+      </div>
+
+      <mat-card class="profile-card" *ngIf="profile.strategic_priorities.length > 0 || profile.job_role.trim().length > 0">
+        <mat-card-title class="profile-card-title" *ngIf="profile.strategic_priorities.length > 0">
+            <span>Strategic priorities</span>
+        </mat-card-title>
+        <ul class="profile-card-body">
+          <ng-container *ngFor="let priority of profile.strategic_priorities">
+            <li *ngIf="priority.trim().length > 0">
+               {{priority}}
+            </li>
+         </ng-container>
+        </ul>
+        <mat-card-title class="profile-card-title" *ngIf="profile.job_role.trim().length > 0">
+            <span>{{profile.fullname | getFirstName}}'s Role</span>
+        </mat-card-title>
+        <p style="padding-left: 35px; line-height: 150%;" class="profile-card-body">{{profile.job_role}}</p>
+      </mat-card>
+
+      <div class="double-card-division-flex">
+        <mat-card [ngClass]="(profile.funded_initiative.length > 0) ? 'tech-stack-fi-present' : 'tech-stack-fi-absent'" *ngIf="profile.tech_stack.length > 0">
+            <mat-card-title class="profile-card-title">
+              <span>Tech Stack</span>
+            </mat-card-title>
+            <ul class="profile-card-body">
+              <ng-container *ngFor="let tech of profile.tech_stack">
+                <li *ngIf="tech.trim().length > 0">
+                   {{tech}}
+                </li>
+             </ng-container>
+            </ul>
+        </mat-card>
+        <mat-card class="profile-half-card" style="margin-right: unset;" *ngIf="profile.funded_initiative.length > 0">
+            <mat-card-title class="profile-card-title">
+              <span>Funded initiatives for the next 12 months</span>
+            </mat-card-title>
+            <ul class="profile-card-body">
+              <ng-container *ngFor="let initiative of profile.funded_initiative">
+                <li *ngIf="initiative.trim().length > 0">
+                   {{initiative}}
+                </li>
+             </ng-container>
+            </ul>
+        </mat-card>
+      </div>
+
+      <mat-card class="profile-card" *ngIf="profile.technologies_interest.length > 0">
+        <mat-card-title class="profile-card-title">
+            <span>Technologies interested in</span>
+        </mat-card-title>
+        <ul style="column-count: 2;" class="profile-card-body">
+          <ng-container *ngFor="let technology of profile.technologies_interest">
+            <li style="line-height: 200%; margin-top:0px;" *ngIf="technology.trim().length > 0">
+               {{technology}}
+            </li>
+         </ng-container>
+        </ul>
+      </mat-card>
+
+      <mat-card class="profile-card" style="margin-bottom: unset; margin-top: 2%" *ngIf="profile.topics_interest.length > 0">
+        <mat-card-title class="profile-card-title">
+            <span>Topics interested in</span>
+        </mat-card-title>
+        <ul class="profile-card-body">
+          <ng-container *ngFor="let topic of profile.topics_interest">
+            <li *ngIf="topic.trim().length > 0">
+               {{topic}}
+            </li>
+         </ng-container>
+        </ul>
+      </mat-card>
+  </div>
+  <div class="full-profile-footer">
+    <mat-card-title style="padding-top: 20px; padding-bottom: 20px;">
+      <a href="https://www.commonsense.events/" target="_blank">
+        www.commonsense.events
+      </a>
+    </mat-card-title>
+    <mat-card-title style="margin-top: 0.1px; padding-top: 20px; padding-bottom: 20px;">
+      <a href="https://www.buyerforesight.com/" target="_blank">
+        www.buyerforesight.com
+      </a>
+    </mat-card-title>
+  </div>
+ </div>
+
+ <!-- Booklet Footer -->
+  <div *ngIf="bookletCompositeInit.footer_image">
+    <img [src]=[bookletCompositeInit.footer_image] class="full-header-image">
+  </div>
+</div>
+

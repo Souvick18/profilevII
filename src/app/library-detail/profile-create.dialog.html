@@ -1,0 +1,162 @@
+<mat-dialog-content>
+  <div class="internal-sidenav-division">
+    <form *ngIf="newProfileForm" [formGroup]="newProfileForm" >
+      <div class="double-card-division-flex">
+        <mat-card  style="width:260px; max-width:260px; height:338px; position:relative;" class="user-half-card">
+          <div style="justify-content: center;display:flex;">
+              <img [src]="profileImageEncoded" width="250" height="250">
+          </div>
+          <div style="padding-top: 30px;justify-content: center;display:flex;">
+              <button type="button" mat-stroked-button (click)="chooseImageButton.click()">
+                Choose Image
+                <mat-icon>photo_library</mat-icon>
+              </button>
+              <input (change)="uploadImage($event)" #chooseImageButton type="file" style="display: none;"/>
+          </div>
+        </mat-card>
+
+        <mat-card class="user-half-card">
+
+          <p class="inputfield">
+              <mat-form-field appearance="fill" style="width:45%;">
+                <mat-label>Fullname*</mat-label>
+                <input matInput type="text" formControlName="fullName">
+              </mat-form-field>
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-form-field appearance="fill" style="width:45%;">
+                <mat-label>Company Name*</mat-label>
+                <input matInput type="text" formControlName="companyName">
+            </mat-form-field>
+          </p>
+          <p class="inputfield">
+              <mat-form-field appearance="fill" style="width:45%;">
+                <mat-label>Job Title*</mat-label>
+                <input matInput type="text" formControlName="jobTitle">
+              </mat-form-field>
+              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <mat-form-field appearance="fill" style="width:45%;">
+                <mat-label>Email* (e.g. supriyo.debnath@buyerforesight.com)</mat-label>
+                <input matInput type="text" formControlName="emailAddress">
+              </mat-form-field>
+          </p>
+          <p class="inputfield">
+              <mat-form-field appearance="fill" style="width:45%;">
+                <mat-label>LinkedIn* (e.g. www.linkedin.com/in/supriyodebnath)</mat-label>
+                <input matInput type="text" formControlName="linkedinUrl">
+              </mat-form-field>
+              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+              <mat-form-field appearance="fill" style="width:45%;">
+                <mat-label>Website* (e.g. www.buyerforesight.com)</mat-label>
+                <input matInput type="text" formControlName="companyWebsite">
+              </mat-form-field>
+          </p>
+          <p class="inputfield">
+              <mat-form-field appearance="fill" style="width:45%;">
+                <mat-label>Phone*</mat-label>
+                <input matInput type="text" formControlName="contactNo">
+              </mat-form-field>
+              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+              <mat-form-field appearance="fill" style="width:45%;">
+                <mat-label>Address*</mat-label>
+                <input matInput type="text" formControlName="companyAddress">
+              </mat-form-field>
+          </p>
+
+        </mat-card>
+      </div>
+        <mat-card class="user-card">
+          <div style="height:66px;">
+              <span style="font-size:24px;"> <b>Strategic Priorities</b> </span>&nbsp;
+              <mat-icon (click)="addPriorities()" class="add-text-button-success">add_circle_outline</mat-icon> &nbsp;&nbsp;
+              <mat-icon (click)="removePriorities()" class="remove-text-button-danger">remove_circle_outline</mat-icon>
+          </div>
+          <div >
+
+          <mat-form-field *ngFor="let priority of getStrategicPrioritesFormControls(); let i = index" appearance="fill" style="width:100%;">
+              <mat-label> Strategic Priority {{i+1}}</mat-label>
+              <input matInput type="text" [formControl]="priority">
+          </mat-form-field>
+
+        </div>
+
+
+          <mat-form-field appearance="fill" style="width:100%;">
+              <mat-card-title style="font-size:24px;margin-left: -11px;margin-bottom:2%;"> <b>Role</b> </mat-card-title>
+              <textarea rows="3" cols="40" matInput formControlName="jobRole"></textarea>
+          </mat-form-field>
+
+        </mat-card>
+      <div class="double-card-division-flex">
+        <mat-card class="user-half-card">
+          <div style="height:66px;">
+              <span style="font-size:24px;"> <b>Tech Stack</b> </span>&nbsp;
+              <mat-icon (click)=addTechStack() class="add-text-button-success">add_circle_outline</mat-icon> &nbsp;&nbsp;
+              <mat-icon (click)=removeTechstack() class="remove-text-button-danger">remove_circle_outline</mat-icon>
+          </div>
+          <div *ngFor="let techstack of getTechStackFormControls(); let i = index">
+
+          <mat-form-field appearance="fill" style="width:100%;">
+              <mat-label>Tech {{i+1}}</mat-label>
+              <input matInput type="text" [formControl]="techstack">
+          </mat-form-field>
+
+        </div>
+        </mat-card>
+
+        <mat-card class="user-half-card">
+          <div style="height:66px;">
+              <span style="font-size:24px;"> <b>Funded Initiatives</b> </span>&nbsp;
+              <mat-icon (click)=addInitiatives() class="add-text-button-success">add_circle_outline</mat-icon> &nbsp;&nbsp;
+              <mat-icon (click)=removeInitiatives() class="remove-text-button-danger">remove_circle_outline</mat-icon>
+          </div>
+          <div *ngFor="let initiative of getInitiativeFormControls(); let i= index">
+              <mat-form-field appearance="fill" style="width:100%;">
+                <mat-label>Initiative {{i+1}}</mat-label>
+                <input matInput type="text" [formControl]="initiative">
+              </mat-form-field>
+          </div>
+        </mat-card>
+      </div>
+      <mat-card class="user-card">
+        <div style="height:66px;">
+          <span style="font-size:24px;"> <b>Technologies Interested In</b> </span>&nbsp;
+          <mat-icon (click)=addTechnologies() class="add-text-button-success">add_circle_outline</mat-icon> &nbsp;&nbsp;
+          <mat-icon (click)=removeTechnologies() class="remove-text-button-danger">remove_circle_outline</mat-icon>
+        </div>
+        <div *ngFor="let technology of getTechnologiesFormControls(); let i= index">
+          <mat-form-field appearance="fill" style="width:100%;">
+              <mat-label>Technologies {{i+1}}</mat-label>
+              <input matInput type="text" [formControl]="technology">
+          </mat-form-field>
+        </div>
+        </mat-card>
+        <mat-card class="user-card">
+          <div style="height:66px;">
+              <span style="font-size:24px;"> <b>Topics Interested In</b> </span>&nbsp;
+              <mat-icon (click)=addTopics() class="add-text-button-success">add_circle_outline</mat-icon> &nbsp;&nbsp;
+              <mat-icon (click)=removeTopics() class="remove-text-button-danger">remove_circle_outline</mat-icon>
+          </div>
+          <div *ngFor="let topic of getTopicsFormControls(); let i= index">
+              <mat-form-field appearance="fill" style="width:100%;">
+                <mat-label>Topic {{i+1}}</mat-label>
+                <input matInput type="text" [formControl]="topic">
+              </mat-form-field>
+          </div>
+          </mat-card>
+        </form>
+      </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <div class="progress-spinner" *ngIf="serviceResponseProgress">
+    <mat-progress-spinner *ngIf="serviceResponseProgress"
+           class="progress-spinner-margin"
+           [color]="srpColor"
+           [mode]="srpMode"
+           [value]="srpValue">
+    </mat-progress-spinner>
+   </div>
+
+  <button mat-button (click)=resetForm() class="danger-button-md">Reset</button>
+  <button mat-button cdkFocusInitial class="success-button-md" (click)="addProfile()">Submit</button>
+</mat-dialog-actions>

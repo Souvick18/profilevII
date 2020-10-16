@@ -1,0 +1,16 @@
+  <mat-dialog-content>
+    Are you sure to remove {{this.userName}} from this booklet?
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <div class="progress-spinner" *ngIf="serviceResponseProgress">
+      <mat-progress-spinner *ngIf="serviceResponseProgress"
+             class="progress-spinner-margin"
+             [color]="srpColor"
+             [mode]="srpMode"
+             [value]="srpValue">
+      </mat-progress-spinner>
+     </div>
+
+    <button mat-button  (click)="eventCallNo()" class="success-button-sm">No</button>
+    <button mat-button cdkFocusInitial (click)="eventCallYes()" class="danger-button-sm">Yes</button>
+  </mat-dialog-actions>

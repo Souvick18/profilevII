@@ -1,0 +1,21 @@
+.main-container {
+    height: 100%;
+}
+
+.mat-tab-content-details{
+    padding: 15px;
+    padding-left: 25px;
+}
+
+.library-card {
+    border: 1px solid #4E9691;
+    border-left: 12px solid #4E9691;
+    width: 95%;
+    background-color: #4e969159;
+    margin-top: 2%;
+    padding-right: 12px !important;
+ }
+
+ a{
+     text-decoration: none;
+ }

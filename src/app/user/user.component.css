@@ -1,0 +1,54 @@
+.main-container {
+    height: 100%;
+}
+
+.main-sidenav-content {
+    padding-left: 20px;
+}
+
+.main-header {
+    margin-left: -20px;
+    clip-path: inset(0px round 80px 80px 0px 0px);
+    height:80px;
+    background-color: #4E9691;
+}
+
+ .user-card {
+    border: 1px solid #4E9691;
+    border-left: 12px solid #4E9691;
+    min-width: 66%;
+    width: fit-content;
+ }
+
+ .generalinfo-card {
+  border: 1px solid #4E9691;
+  border-left: 12px solid #4E9691;
+  width: 100%;
+ }
+
+ .user-profile-row {
+    display: flex;
+    /* margin-left: -20px; */
+    width: 69%;
+  }
+
+  .user-profile-column {
+    flex: 33.33%;
+    /* padding-left: 25px; */
+  }
+
+  #image-user.image-user-open{
+    width:200px;
+    height:200px;
+    margin-left:8px;
+    float: right !important;
+    margin-top:5.7%;
+}
+
+#image-user.image-user-close{
+    width:200px;
+    height:200px;
+    margin-left:8px;
+    float: right !important;
+    margin-top:6.6%;
+}

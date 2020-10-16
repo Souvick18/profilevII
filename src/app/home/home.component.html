@@ -1,0 +1,11 @@
+<mat-sidenav-container class="main-container" autosize>
+
+ <mat-sidenav #sidenav id="sidenav" mode="side" [class.menu-open]="isExpanded" [class.menu-close]=!isExpanded opened="true">
+    <app-sidenav [expanded]="isExpanded" (changeSidenavState)="changeState($event)"></app-sidenav>
+ </mat-sidenav>
+
+ <div class="main-sidenav-content">
+  <h1>Dashboard coming soon</h1>
+ </div>
+
+</mat-sidenav-container>
